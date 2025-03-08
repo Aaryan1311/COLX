@@ -1,6 +1,7 @@
 import express from 'express'
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
+import authRouter  from './routes/auth.js';
 import cookieParser from 'cookie-parser';
 dotenv.config();
 
@@ -15,13 +16,11 @@ const app = express();
 
 // middleware
 app.use(express.json());
-app.use(cookieParser)
+app.use(cookieParser());
 
 
+app.use('/api/auth', authRouter);
 
-app.get('/', (req,res) =>{
-    res.send('Hello');
-})
 
 app.listen(3000,()=>{
     console.log(`App listening on port 3000`)
