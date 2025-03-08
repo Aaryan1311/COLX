@@ -1,16 +1,20 @@
 import express from 'express'
-import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import connectDB from  './config/db.js';
+
+//configure env
 dotenv.config();
 
+//connect to db
+connectDB();
 
-mongoose.connect(process.env.MONGODB).then(()=>{
-    console.log('Connected to MongoDB')
-}).catch((err)=>{
-    console.log(err)
-})
+// port
+const port = 3000;
 
+// rest object 
 const app = express();
+
+// middleware
 app.use(express.json());
 
 
