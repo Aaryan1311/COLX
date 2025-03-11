@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true
+        
     },
     password: {
         type: String,
@@ -31,7 +31,14 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
-    }
+    },
+    otp:{
+        type: String,
+    },
+    otpExpiry:{
+        type: Date
+    },
+    isVerified: { type: Boolean, default: false },
 }, {
     timestamps: true
 });
