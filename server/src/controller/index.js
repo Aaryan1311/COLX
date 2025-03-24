@@ -1,7 +1,8 @@
-const authController = require("./auth/auth.controller");
-const listingController = require("./listing/listing.controller");
 
-module.exports = {
+import authController from "./auth/auth.controller";
+import listingController from "./listing/listing.controller";
+
+export default {
   authController,
   listingController,
 };

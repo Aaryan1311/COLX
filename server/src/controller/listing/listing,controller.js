@@ -1,4 +1,4 @@
-import product from "../model/product.model.js";
+import product from "../../model/product/product.model.js";
 import { errorHandler } from "../../utils/error.js";
 
 export const createProductListing = async (req, res, next) => {

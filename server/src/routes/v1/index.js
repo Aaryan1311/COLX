@@ -1,11 +1,11 @@
-const express = require("express");
-const authRoutes = require("./api/auth");
-const productRoutes = require("./api/product");
+import express from "express";
+import authRoutes from "./api/auth.js";
+import productRoutes from "./api/product.js";
 
 const router = express.Router();
 
-// Use routes
+
 router.use("/auth", authRoutes);
 router.use("/product", productRoutes);
 
-module.exports = router;
+export default router;

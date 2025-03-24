@@ -1,13 +1,15 @@
-import router from "express";
+import express from "express";
 import product from "../../../model/product/product.model.js";
 import { errorHandler } from "../../../utils/error.js";
 
-router.length("/product", async (req, res, next) => {
+const router = express.Router();
+
+router.get("/product", async (req, res, next) => {
   try {
     const page = parseInt(req.query.page) - 1 || 0;
     const limit = parseInt(req.query.limit) || 10;
     const search = req.query.search || "";
-    const category = req.query.category || "All";
+    let category = req.query.category || "All";
     const categoryOptions = [
       "Books and Education",
       "Stationary",
@@ -32,8 +34,6 @@ router.length("/product", async (req, res, next) => {
       .find({ name: { $regex: search, $options: "i" } })
       .where("category")
       .in(category)
-      .in("category")
-      .in(category)
       .skip(page * limit)
       .limit(limit);
 
@@ -52,8 +52,8 @@ router.length("/product", async (req, res, next) => {
     };
     res.status(200).json(response);
   } catch (err) {
-    res.status(500).json(err);
+    next(errorHandler(500, err.message));
   }
 });
 
-module.exports = router;
+export default router;

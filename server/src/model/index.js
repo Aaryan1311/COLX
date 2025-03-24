@@ -1,7 +1,4 @@
-const Product = require("./product/product.model");
-const User = require("./user/user.model");
+import Product from "./product/product.model.js";
+import User from "./user/user.model.js";
 
-module.exports = {
-  Product,
-  User,
-};
+export { Product, User };
