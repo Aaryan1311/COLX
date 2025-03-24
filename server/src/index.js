@@ -6,18 +6,21 @@ import cookieParser from "cookie-parser";
 
 dotenv.config();
 
+const app = express();
+// middleware
+app.use(express.json());
+app.use(cookieParser());
+
+
 //connect to db
 connectDB();
 
 // port
-const port = 8080;
+const port = 3000;
 
 // rest object
-const app = express();
 
 // middleware
-app.use(express.json());
-app.use(cookieParser());
 
 app.use("/api", router);
 app.get("/", (req, res) => {

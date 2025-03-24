@@ -15,7 +15,7 @@ export const updateProductListing = async (req, res, next) => {
   if (!listing) {
     return next(errorHandler(404, "Product not found"));
   }
-  if (req.user.id !== listing.user.toString()) {
+  if (req.user.id !== listing.userRef) {
     return next(
       errorHandler(403, "You are not authorized to update this product")
     );
@@ -26,7 +26,7 @@ export const updateProductListing = async (req, res, next) => {
       req.body,
       {
         new: true,
-        runValidators: true,
+       
       }
     );
     res.status(200).json(updatedListing);
