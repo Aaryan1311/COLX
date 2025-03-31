@@ -33,6 +33,11 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    gender: {
+        type: String, 
+        enum: ["Male", "Female"], 
+        required: true
+    },
     otp:{
         type: String,
     },

@@ -22,9 +22,9 @@ const generateOTP = () => {
 
 export const sendOtp = async (req, res) => {
   // console.log("Request received:", req.body)
-  const { name, email, password, branch, rollNo, phoneNo } = req.body;
+  const { name, email, password, branch, rollNo, phoneNo,gender } = req.body;
 
-  if (!name || !email || !password || !branch || !rollNo || !phoneNo) {
+  if (!name || !email || !password || !branch || !rollNo || !phoneNo|| !gender) {
     return res.status(400).json({ message: "Please fill all details" });
   }
 
@@ -61,7 +61,7 @@ export const sendOtp = async (req, res) => {
 };
 
 export const verifyOtpAndSignup = async (req, res) => {
-  const { email, name, password, branch, rollNo, phoneNo,otp } = req.body;
+  const { email, name, password, branch, rollNo, phoneNo,gender,otp } = req.body;
 
   
 
@@ -87,6 +87,7 @@ export const verifyOtpAndSignup = async (req, res) => {
     branch,
     rollNo,
     phoneNo,
+    gender,
     isVerified: true
   });
   try {
@@ -110,13 +111,16 @@ export const signin = async (req, res) => {
     if (!isPasswordCorrect)
       return res.status(400).json({ message: "Invalid credentials" });
     const token = jwt.sign(
-      { rollNo: existingUser.rollNo, id: existingUser._id },
+      { id: existingUser._id },
       process.env.SECRET,
       { expiresIn: "1d" }
     );
 
     const { password: pass, ...rest } = existingUser._doc;
-    return res.status(200).json({ rest });
+    return res
+    .cookie('access_token', token, { httpOnly: true })
+    .status(200)
+    .json({ rest });
   } catch (error) {
     res.status(500).json({ message: "Signin failed" });
   }

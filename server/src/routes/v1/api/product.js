@@ -1,14 +1,15 @@
 import express from "express";
 import product from "../../../model/product/product.model.js";
-import { errorHandler } from "../../../utils/error.js";
-import { createProductListing, deleteProductListing, updateProductListing } from "../../../controller/listing/listing,controller.js";
+import { errorHandler} from "../../../utils/error.js";
+import { createProductListing, deleteProductListing, updateProductListing } from "../../../controller/listing/listing.controller.js";
+import { isAuthenticated } from "../../../utils/isAuthenticated.js";
 
 const router = express.Router();
 
 
-router.post("/addProduct", createProductListing)
-router.put("/updateProduct/:id", updateProductListing)
-router.delete("/deleteProduct/:id", deleteProductListing)
+router.post("/addProduct",isAuthenticated,createProductListing)
+router.put("/updateProduct/:id", isAuthenticated,updateProductListing)
+router.delete("/deleteProduct/:id",isAuthenticated, deleteProductListing)
 
 
 
@@ -19,17 +20,17 @@ router.delete("/deleteProduct/:id", deleteProductListing)
 //     const search = req.query.search || "";
 //     let category = req.query.category || "All";
 //     const categoryOptions = [
-//       "Books and Education",
-//       "Stationary",
-//       "Electronic Gadgets",
-//       "Clothing and Fashion",
-//       "Home and Living",
-//       "Sports and Fitness",
-//       "Vehicles and Accessories",
-//       "Beauty and Health",
-//       "Games",
-//       "Furniture",
-//       "Others",
+    //   "Books and Education",
+    //   "Stationary",
+    //   "Electronic Gadgets",
+    //   "Clothing and Fashion",
+    //   "Home and Living",
+    //   "Sports and Fitness",
+    //   "Vehicles and Accessories",
+    //   "Beauty and Health",
+    //   "Games",
+    //   "Furniture",
+    //   "Others",
 //     ];
 
 //     if (category === "All") {

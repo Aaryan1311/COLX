@@ -1,3 +1,4 @@
+import e from "express";
 import mongoose from "mongoose";
 const productScehma = new mongoose.Schema({
     name: {
@@ -12,6 +13,25 @@ const productScehma = new mongoose.Schema({
         type: String,
         required: true
     },
+    category:{
+        type:String,
+        enum:[
+            "Books and Education",
+            "Stationary",
+            "Electronic Gadgets",
+            "Clothing and Fashion",
+            "Home and Living",
+            "Sports and Fitness",
+            "Vehicles and Accessories",
+            "Beauty and Health",
+            "Games",
+            "Furniture",
+            "Others"
+        ],
+        required:true
+
+    },
+
     image: {
         type: Array
     },
@@ -19,10 +39,7 @@ const productScehma = new mongoose.Schema({
         type: Boolean,
         required: true
     },
-    category: {
-        type: String,
-        required: true
-    },
+ 
     productAge:{
         type: String,
         required: true
